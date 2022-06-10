@@ -1,6 +1,10 @@
 const field = document.querySelectorAll(".field");
 const turnBox = document.querySelector(".turnBox");
 
+
+const again = document.querySelector(".again");
+const yup = document.querySelector(".yup");
+
 const areas = Array.from(field);
 
 
@@ -24,10 +28,24 @@ let turn = players[Math.floor(Math.random()*players.length)];
 
 turnBox.innerHTML = turn;
 
+function playAgain()
+{
+    again.style.display = "flex";
+    
+    yup.onclick = function(e)
+    {
+        e.preventDefault();
+        field.forEach(field=> field.addEventListener("click", play));
+        again.style.display = "none";
+        field.forEach(field => field.innerHTML = "");
+        field.forEach(field => field.style.backgroundColor = "whitesmoke");
+    }
+  
+}
+
 function play()
 {
    
-    
     this.removeEventListener("click", play);
     this.style.backgroundColor = "lightgrey";
     this.innerHTML = turn;
@@ -44,26 +62,28 @@ function play()
         turn = "x";
     }
 
-    
-
 
 
     //checking if any player wins
     winningComb.some((combination) =>
     {
+        //X WINS
         if(combination.every((el) => field[el].innerHTML=="x"))
         {
             combination.forEach((el) => field[el].style.backgroundColor = "#90EE90");
             turnBox.innerHTML = "X WINS!"
             field.forEach((field)=>field
             .removeEventListener("click", play));
+            playAgain();
             return;
         }
+        //O WINS
         else if (combination.every((el) => field[el].innerHTML=="o"))
         {
             combination.forEach((el) => field[el].style.backgroundColor = "#90EE90");
             turnBox.innerHTML = "O WINS!"
             field.forEach((field)=>field.removeEventListener("click", play));
+            playAgain();
             return;
         }          
 
@@ -71,6 +91,8 @@ function play()
         else if(areas.every((el)=>el.innerHTML !=""))
         {
             turnBox.innerHTML = "DRAW";
+            field.forEach((field)=>field.removeEventListener("click", play));
+            playAgain();
             return;
         }
 
