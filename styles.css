@@ -77,8 +77,8 @@ main
     position:absolute;
     top:25%;
     left:40px;
-    width:600px;
-    height: 400px;
+    width:450px;
+    height: 330px;
     border-radius: 10px;
     /* display:flex; */
     flex-direction: column;
@@ -89,6 +89,7 @@ main
     box-shadow: 2px 2px 20px black;
     display:none;
     opacity:0.9;
+    animation: flowing 2s linear infinite;
 }
 
 button
@@ -109,4 +110,21 @@ button:hover
 .yup
 {
     background-color: rgb(138, 225, 138);
+}
+@keyframes flowing 
+{
+    0%
+    {
+        transform: scale(1);
+    }
+    25%
+    {
+        transform: scale(1.05);
+    }
+    100%
+    {
+        transform: scale(1);
+    }
+
+
 }
