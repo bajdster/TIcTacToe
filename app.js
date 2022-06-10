@@ -39,6 +39,7 @@ function playAgain()
         again.style.display = "none";
         field.forEach(field => field.innerHTML = "");
         field.forEach(field => field.style.backgroundColor = "whitesmoke");
+        turnBox.innerHTML = turn;
     }
   
 }
